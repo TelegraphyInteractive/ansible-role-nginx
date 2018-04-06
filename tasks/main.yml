@@ -53,3 +53,8 @@
     dest: "{{ nginx_enabled_site_conf }}"
     state: link
   notify: reload nginx
+
+- name: Remove default site
+  file:
+    path: "{{ nginx_conf_root }}/sites-enabled/default"
+    status: absent
