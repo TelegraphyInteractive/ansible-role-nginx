@@ -47,6 +47,11 @@
     dest: "{{ nginx_site_conf }}"
   notify: reload nginx
 
+- name: Upload ssh settings
+  copy:
+    src: "templates/ssl.conf"
+    dest: "{{ nginx_conf_root }}/conf.d/ssl.conf"
+
 - name: Enable site
   file:
     src: "{{ nginx_site_conf }}"
@@ -57,4 +62,4 @@
 - name: Remove default site
   file:
     path: "{{ nginx_conf_root }}/sites-enabled/default"
-    status: absent
+    state: absent
