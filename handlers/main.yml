@@ -1,5 +1,9 @@
 ---
 - name: reload nginx
+  vars:
+    ansible_user: "{{ devops_ssh_user }}"
+    ansible_ssh_port: "{{ devops_ssh_port }}"
+  become: yes
   service:
     name: nginx
     state: reloaded
