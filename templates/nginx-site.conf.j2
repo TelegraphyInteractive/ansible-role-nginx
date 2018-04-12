@@ -31,15 +31,15 @@ server {
   listen 443;
   server_name {{ inventory_hostname }};
 
-  root /home/{{ ansible_user }}/{{ inventory_hostname}}/current/public;
+  root /home/{{ ansible_user }}/{{ site_root }};
   passenger_enabled on;
   client_max_body_size 15M;
 
   #error page handling
   error_page  404  @404;
-  #location @404 {
-    #rewrite ^(.*)$ /404.html break;
-  #}
+  location @404 {
+    rewrite ^(.*)$ /404.html break;
+  }
   error_page  500 502 504  @50x;
   location = @50x {
       root   html;
